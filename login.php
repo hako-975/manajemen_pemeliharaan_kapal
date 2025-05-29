@@ -40,13 +40,18 @@
 <head>
     <title>Manajemen Pelayaran</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="icon" href="foto/logo.png">
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="login">
-    <div class="container">
+<body class="login" style="background-image: url('foto/background.jpg');">
+    <div class="container" style="background-color: #24201f;">
         <form method="post">
-            <h2>Kapal Kargo</h2>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <img src="foto/logo.png" width="300">
+            </div>
+
+            <h5>Manajemen Operasional Pemeliharaan Kapal Kargo</h5>
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" class="input" required>
