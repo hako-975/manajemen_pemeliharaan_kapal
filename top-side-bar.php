@@ -5,13 +5,14 @@
     </div>
     <nav>
         <ul>
-            <li><a href="#">Selamat Datang, <?= $data_user['nama_lengkap']; ?> </a></li>
+            <li><a href="#">Selamat Datang, <?= $dataUser['nama_lengkap']; ?> </a></li>
         </ul>
     </nav>
 </div>
 <div class="sidebar">
     <ul>
         <li><a href="kapal.php">Kapal</a></li>
+        <li><a href="user.php">User</a></li>
         <li><a href="teknisi.php">Teknisi</a></li>
         <li><a href="kondisi.php">Kondisi</a></li>
         <?php 

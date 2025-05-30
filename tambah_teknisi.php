@@ -5,7 +5,7 @@
     }
 
     $id_user = $_SESSION['id_user'];
-    $data_user = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM user WHERE id_user = '$id_user'"));
+    $dataUser = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM user WHERE id_user = '$id_user'"));
 
     $jenis_perawatan = mysqli_query($conn, "SELECT * FROM jenis_perawatan");
 

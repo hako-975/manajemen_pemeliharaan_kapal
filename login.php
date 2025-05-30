@@ -10,9 +10,9 @@
         $password = $_POST['password'];
 
         $query_login = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
-        if ($data_user = mysqli_fetch_assoc($query_login)) {
-            if (password_verify($password, $data_user['password'])) {
-                $_SESSION['id_user'] = $data_user['id_user'];
+        if ($dataUser = mysqli_fetch_assoc($query_login)) {
+            if (password_verify($password, $dataUser['password'])) {
+                $_SESSION['id_user'] = $dataUser['id_user'];
                 header("Location: index.php");
                 exit;
             } else {

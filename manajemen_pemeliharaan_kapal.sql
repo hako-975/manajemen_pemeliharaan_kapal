@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 29 Bulan Mei 2025 pada 12.20
+-- Waktu pembuatan: 30 Bulan Mei 2025 pada 14.40
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -213,16 +213,18 @@ INSERT INTO `teknisi` (`id_teknisi`, `nama`, `jabatan`, `id_jenis_perawatan`) VA
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
   `nama_lengkap` varchar(50) NOT NULL,
-  `username` varchar(10) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('Administrator','Operator') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id_user`, `nama_lengkap`, `username`, `password`) VALUES
-(1, 'Admin', 'Admin', '$2y$10$8Jp9oTzG8Da2ViApZt6lwOsgfVWohP7frPnQaehfG99qO1diwZOq.');
+INSERT INTO `user` (`id_user`, `nama_lengkap`, `username`, `password`, `role`) VALUES
+(1, 'Admin', 'admin', '$2y$10$8Jp9oTzG8Da2ViApZt6lwOsgfVWohP7frPnQaehfG99qO1diwZOq.', 'Administrator'),
+(3, 'Operator', 'operator', '$2y$10$rzxGkRc79Fi2D95Bdy/cResM1N5XKS/UWrkxLKj.8Xpy9o7sAIuNC', 'Operator');
 
 --
 -- Indexes for dumped tables
@@ -303,7 +305,7 @@ ALTER TABLE `kapal`
 -- AUTO_INCREMENT untuk tabel `kondisi`
 --
 ALTER TABLE `kondisi`
-  MODIFY `id_kondisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_kondisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT untuk tabel `perawatan`
@@ -321,7 +323,7 @@ ALTER TABLE `teknisi`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

@@ -18,7 +18,7 @@
     $jenis_perawatan = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM jenis_perawatan WHERE id_jenis_perawatan = '$id_jenis_perawatan'"));
 
     $id_user = $_SESSION['id_user'];
-    $data_user = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM user WHERE id_user = '$id_user'"));
+    $dataUser = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM user WHERE id_user = '$id_user'"));
 
     $perawatan = mysqli_query($conn, "SELECT * FROM perawatan INNER JOIN kapal ON perawatan.id_kapal = kapal.id_kapal INNER JOIN teknisi ON perawatan.id_teknisi = teknisi.id_teknisi INNER JOIN jenis_perawatan ON perawatan.id_jenis_perawatan = jenis_perawatan.id_jenis_perawatan WHERE perawatan.id_jenis_perawatan = '$id_jenis_perawatan' ORDER BY tanggal_perawatan ASC");
 
