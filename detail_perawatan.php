@@ -10,9 +10,9 @@
 
     $id_user = $_SESSION['id_user'];
     $dataUser = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM user WHERE id_user = '$id_user'"));
-    $check_detail_perawatan = mysqli_query($conn, "SELECT * FROM detail_perawatan WHERE id_perawatan = '$id_perawatan' AND status_kondisi = 'Sudah' AND tanda_tangan IS NOT NULL;");
-    if ($check_detail_perawatan) {
-        mysqli_query($conn, "UPDATE perawatan SET status = 'Sudah'");
+    $check_detail_perawatan = mysqli_query($conn, "SELECT * FROM detail_perawatan WHERE id_perawatan = '$id_perawatan' AND status_kondisi = 'Sudah' AND tanda_tangan IS NOT NULL");
+    if (mysqli_num_rows($check_detail_perawatan) > 0) {
+        mysqli_query($conn, "UPDATE perawatan SET status = 'Sudah' WHERE id_perawatan = '$id_perawatan'");
     }
 ?>
 <!doctype html>

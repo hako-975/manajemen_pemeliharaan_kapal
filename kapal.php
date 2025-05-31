@@ -50,7 +50,7 @@
                 <?php $i = 1; ?>
                 <?php foreach ($kapal as $data_kapal) : ?>
                     <tr>
-                        <td><?= $i++ ?></td>
+                        <td><?= $i++; ?>.</td>
                         <td><?= $data_kapal['nama_kapal']; ?></td>
                         <td><img src="foto/kapal/<?= $data_kapal['foto_kapal']; ?>" alt="<?= $data_kapal['foto_kapal']; ?>"></td>
                         <!-- <td>

@@ -66,13 +66,13 @@
                 <?php foreach ($perawatan as $data_perawatan) : ?>
                     <?php 
                         $id_perawatan = $data_perawatan['id_perawatan'];
-                        $detail_perawatan = mysqli_query($conn, "SELECT * FROM detail_perawatan WHERE id_perawatan = '$id_perawatan' AND status_kondisi = 'Sudah' AND tanda_tangan IS NOT NULL;");
-                        if ($detail_perawatan) {
-                            mysqli_query($conn, "UPDATE perawatan SET status = 'Sudah'");
+                        $detail_perawatan = mysqli_query($conn, "SELECT * FROM detail_perawatan WHERE id_perawatan = '$id_perawatan' AND status_kondisi = 'Sudah' AND tanda_tangan IS NOT NULL");
+                        if (mysqli_num_rows($detail_perawatan) > 0) {
+                            mysqli_query($conn, "UPDATE perawatan SET status = 'Sudah' WHERE id_perawatan = '$id_perawatan'");
                         }
                      ?>
                     <tr>
-                        <td><?= $i++ ?></td>
+                        <td><?= $i++; ?>.</td>
                         <td><?= date('d-m-Y H:i', strtotime($data_perawatan['tanggal_perawatan'])); ?></td>
                         <td><?= $data_perawatan['nama_kapal']; ?></td>
                         <td><?= $data_perawatan['nama']; ?></td>

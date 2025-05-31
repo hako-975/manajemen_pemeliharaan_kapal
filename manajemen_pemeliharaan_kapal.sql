@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Bulan Mei 2025 pada 14.40
+-- Waktu pembuatan: 31 Bulan Mei 2025 pada 10.19
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -80,7 +80,23 @@ INSERT INTO `detail_perawatan` (`id_detail_perawatan`, `id_perawatan`, `id_kondi
 (35, 9, 1, '', '', 'Belum', NULL, ''),
 (36, 9, 2, '', '', 'Belum', NULL, ''),
 (37, 9, 3, '', '', 'Belum', NULL, ''),
-(38, 9, 4, '', '', 'Belum', NULL, '');
+(38, 9, 4, '', '', 'Belum', NULL, ''),
+(39, 10, 1, '', '', 'Belum', NULL, ''),
+(40, 10, 2, '', '', 'Belum', NULL, ''),
+(41, 10, 3, '', '', 'Belum', NULL, ''),
+(42, 10, 4, '', '', 'Belum', NULL, ''),
+(43, 11, 1, '', '', 'Belum', NULL, ''),
+(44, 11, 2, '', '', 'Belum', NULL, ''),
+(45, 11, 3, '', '', 'Belum', NULL, ''),
+(46, 11, 4, '', '', 'Belum', NULL, ''),
+(47, 12, 1, '', '', 'Belum', NULL, ''),
+(48, 12, 2, '', '', 'Belum', NULL, ''),
+(49, 12, 3, '', '', 'Belum', NULL, ''),
+(50, 12, 4, '', '', 'Belum', NULL, ''),
+(51, 13, 1, '', '', 'Belum', NULL, ''),
+(52, 13, 2, '', '', 'Belum', NULL, ''),
+(53, 13, 3, '', '', 'Belum', NULL, ''),
+(54, 13, 4, '', '', 'Belum', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -177,10 +193,9 @@ CREATE TABLE `perawatan` (
 --
 
 INSERT INTO `perawatan` (`id_perawatan`, `id_kapal`, `id_teknisi`, `id_jenis_perawatan`, `tanggal_perawatan`, `status`) VALUES
-(6, 1, 2, 2, '2025-05-29 17:04:43', 'Sudah'),
 (7, 1, 1, 1, '2025-05-29 17:04:53', 'Sudah'),
 (8, 1, 3, 3, '2025-05-29 17:04:57', 'Sudah'),
-(9, 1, 1, 1, '2025-05-29 17:11:09', 'Sudah');
+(13, 1, 1, 1, '2025-05-30 20:32:15', 'Belum');
 
 -- --------------------------------------------------------
 
@@ -287,7 +302,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `detail_perawatan`
 --
 ALTER TABLE `detail_perawatan`
-  MODIFY `id_detail_perawatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_detail_perawatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT untuk tabel `jenis_perawatan`
@@ -311,7 +326,7 @@ ALTER TABLE `kondisi`
 -- AUTO_INCREMENT untuk tabel `perawatan`
 --
 ALTER TABLE `perawatan`
-  MODIFY `id_perawatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_perawatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `teknisi`

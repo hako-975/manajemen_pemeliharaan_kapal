@@ -51,7 +51,7 @@
                 <?php $i = 1; ?>
                 <?php foreach ($teknisi as $data_teknisi) : ?>
                     <tr>
-                        <td><?= $i++ ?></td>
+                        <td><?= $i++; ?>.</td>
                         <td><?= $data_teknisi['jenis_perawatan']; ?></td>
                         <td><?= $data_teknisi['nama']; ?></td>
                         <td><?= $data_teknisi['jabatan']; ?></td>
