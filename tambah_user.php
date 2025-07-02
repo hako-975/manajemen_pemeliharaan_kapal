@@ -14,6 +14,7 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
         $ulangi_password = $_POST['ulangi_password'];
+        $role = $_POST['role'];
         
         if ($password != $ulangi_password) {
             echo "
@@ -26,7 +27,7 @@
         }
 
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
-        $query = "INSERT INTO user VALUES ('', '$nama_lengkap', '$username', '$password_hash', 'Operator')";
+        $query = "INSERT INTO user VALUES ('', '$nama_lengkap', '$username', '$password_hash', '$role')";
         $tambah_user = mysqli_query($conn, $query);
     
         if ($tambah_user) {
@@ -78,6 +79,14 @@
             <div class="form-group">
                 <label for="ulangi_password">Ulangi Password</label>
                 <input type="password" id="ulangi_password" name="ulangi_password" class="input" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select name="role" id="role" class="form-select">
+                    <option value="Kru Lambung Kapal">Kru Lambung Kapal</option>
+                    <option value="Kru Alat Navigasi Kapal">Kru Alat Navigasi Kapal</option>
+                    <option value="Kru Alat Kebakaran dan Keselamatan Kapal">Kru Alat Kebakaran dan Keselamatan Kapal</option>
+                </select>
             </div>
             <button type="submit" class="btn" name="btnSimpan">Simpan</button>
         </form>

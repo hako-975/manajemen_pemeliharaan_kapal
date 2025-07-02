@@ -20,7 +20,7 @@
     $id_user = $_SESSION['id_user'];
     $dataUser = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM user WHERE id_user = '$id_user'"));
 
-    $perawatan = mysqli_query($conn, "SELECT * FROM perawatan INNER JOIN kapal ON perawatan.id_kapal = kapal.id_kapal INNER JOIN teknisi ON perawatan.id_teknisi = teknisi.id_teknisi INNER JOIN jenis_perawatan ON perawatan.id_jenis_perawatan = jenis_perawatan.id_jenis_perawatan WHERE perawatan.id_jenis_perawatan = '$id_jenis_perawatan' ORDER BY tanggal_perawatan ASC");
+    $perawatan = mysqli_query($conn, "SELECT * FROM perawatan INNER JOIN kapal ON perawatan.id_kapal = kapal.id_kapal INNER JOIN kru ON perawatan.id_kru = kru.id_kru INNER JOIN jenis_perawatan ON perawatan.id_jenis_perawatan = jenis_perawatan.id_jenis_perawatan WHERE perawatan.id_jenis_perawatan = '$id_jenis_perawatan' ORDER BY tanggal_perawatan ASC");
 
     if (isset($_POST['btnCari'])) {
         $cari = $_POST['cari'];
@@ -40,8 +40,10 @@
   <body>
   <?php include 'top-side-bar.php'; ?>
     <div class="main">
-    <h1>Perawatan Kapal - <?= $jenis_perawatan['jenis_perawatan']; ?></h1>
-        <a href="tambah_perawatan.php?id_jenis_perawatan=<?= $id_jenis_perawatan; ?>" class="btn">Tambah perawatan</a>
+        <h1>Perawatan Kapal - <?= $jenis_perawatan['jenis_perawatan']; ?></h1>
+        <?php if ($dataUser['role'] != 'Administrator'): ?>
+            <a href="tambah_perawatan.php?id_jenis_perawatan=<?= $id_jenis_perawatan; ?>" class="btn">Tambah perawatan</a>
+        <?php endif ?>
         <br>
         <br>
         <form method="post" style="display: flex; flex-direction: row; width: 50%;">
@@ -58,28 +60,33 @@
                     <th>Nama Kapal</th>
                     <th>Nama Teknisi</th>
                     <th>Status</th>
+                    <th>Catatan Revisi</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $i = 1; ?>
                 <?php foreach ($perawatan as $data_perawatan) : ?>
-                    <?php 
-                        $id_perawatan = $data_perawatan['id_perawatan'];
-                        $detail_perawatan = mysqli_query($conn, "SELECT * FROM detail_perawatan WHERE id_perawatan = '$id_perawatan' AND status_kondisi = 'Sudah' AND tanda_tangan IS NOT NULL");
-                        if (mysqli_num_rows($detail_perawatan) > 0) {
-                            mysqli_query($conn, "UPDATE perawatan SET status = 'Sudah' WHERE id_perawatan = '$id_perawatan'");
-                        }
-                     ?>
                     <tr>
                         <td><?= $i++; ?>.</td>
                         <td><?= date('d-m-Y H:i', strtotime($data_perawatan['tanggal_perawatan'])); ?></td>
                         <td><?= $data_perawatan['nama_kapal']; ?></td>
                         <td><?= $data_perawatan['nama']; ?></td>
-                        <td><?= $data_perawatan['status']; ?></td>
+                        <td>
+                            <?php if ($data_perawatan['status'] == 'Sudah'): ?>
+                                <span class="p-2 rounded text-white bg-success">Sudah</span>
+                            <?php elseif ($data_perawatan['status'] == 'Perlu Direvisi'): ?>
+                                <span class="p-2 rounded text-white bg-warning">Perlu Direvisi</span>
+                            <?php elseif ($data_perawatan['status'] == 'Belum Dibaca'): ?>
+                                <span class="p-2 rounded text-white bg-danger">Belum Dibaca</span>
+                            <?php endif ?>
+                        </td>
+                        <td><?= $data_perawatan['catatan_revisi']; ?></td>
                         <td>
                             <a href="detail_perawatan.php?id_perawatan=<?= $data_perawatan['id_perawatan']; ?>" class="btn bg-primary margin-5px">Detail</a>
-                            <a href="ubah_perawatan.php?id_perawatan=<?= $data_perawatan['id_perawatan']; ?>&id_jenis_perawatan=<?= $id_jenis_perawatan; ?>" class="btn margin-5px">Ubah</a>
+                            <!-- <?php if ($dataUser['role'] != 'Administrator'): ?>
+                                <a href="ubah_perawatan.php?id_perawatan=<?= $data_perawatan['id_perawatan']; ?>&id_jenis_perawatan=<?= $id_jenis_perawatan; ?>" class="btn margin-5px">Ubah</a>
+                            <?php endif ?> -->
                             <a onclick="return confirm('Apakah Anda yakin ingin menghapus perawatan?')" href="hapus_perawatan.php?id_perawatan=<?= $data_perawatan['id_perawatan']; ?>&id_jenis_perawatan=<?= $id_jenis_perawatan; ?>" class="btn margin-5px bg-red">Hapus</a>
                         </td>
                     </tr>

@@ -15,7 +15,7 @@ $filter_jenis = $_GET['jenis_perawatan'] ?? '';
 
 $query = "SELECT * FROM perawatan 
 INNER JOIN kapal ON perawatan.id_kapal = kapal.id_kapal 
-INNER JOIN teknisi ON perawatan.id_teknisi = teknisi.id_teknisi 
+INNER JOIN kru ON perawatan.id_kru = kru.id_kru 
 INNER JOIN jenis_perawatan ON perawatan.id_jenis_perawatan = jenis_perawatan.id_jenis_perawatan 
 WHERE 1=1";
 
@@ -106,13 +106,6 @@ function namaBulan($bulan) {
         </thead>
         <tbody>
             <?php $i = 1; foreach ($perawatan as $data_perawatan): ?>
-                <?php 
-                    $id_perawatan = $data_perawatan['id_perawatan'];
-                    $update_detail_perawatan = mysqli_query($conn, "SELECT * FROM detail_perawatan WHERE id_perawatan = '$id_perawatan' AND status_kondisi = 'Sudah' AND tanda_tangan IS NOT NULL");
-                    if (mysqli_num_rows($update_detail_perawatan) > 0) {
-                        mysqli_query($conn, "UPDATE perawatan SET status = 'Sudah' WHERE id_perawatan = '$id_perawatan'");
-                    }
-                ?>
                 <tr>
                     <td><?= $i++ ?>.</td>
                     <td><?= date('d-m-Y H:i', strtotime($data_perawatan['tanggal_perawatan'])) ?></td>
@@ -126,6 +119,7 @@ function namaBulan($bulan) {
 
                 <!-- Detail -->
                 <?php 
+                    $id_perawatan = $data_perawatan['id_perawatan'];
                     $detail_perawatan = mysqli_query($conn, "SELECT * FROM detail_perawatan 
                     INNER JOIN kondisi ON detail_perawatan.id_kondisi = kondisi.id_kondisi 
                     WHERE id_perawatan = '$id_perawatan'");
@@ -136,8 +130,8 @@ function namaBulan($bulan) {
                     <th>Tanggal Cek Kondisi</th>
                     <th>Catatan Kondisi</th>
                     <th>Foto Kondisi</th>
-                    <th>Status Kondisi</th>
                     <th>Tanda Tangan</th>
+                    <th>Nama Kru</th>
                 </tr>
                 <?php 
                     $abjad = range('a', 'z');
@@ -155,7 +149,6 @@ function namaBulan($bulan) {
                                 </a>
                             <?php else: ?>Belum ada<?php endif ?>
                         </td>
-                        <td><?= $ddp['status_kondisi'] ?></td>
                         <td>
                             <?php if ($ddp['tanda_tangan']): ?>
                                 <a href="foto/tanda_tangan/<?= $ddp['tanda_tangan'] ?>" target="_blank">
@@ -163,6 +156,7 @@ function namaBulan($bulan) {
                                 </a>
                             <?php else: ?>Belum ada<?php endif ?>
                         </td>
+                        <td><?= $ddp['nama_kru'] ?></td>
                     </tr>
                 <?php endforeach ?>
             <?php endforeach ?>

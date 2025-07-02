@@ -17,11 +17,11 @@
 
 
     $kapal = mysqli_query($conn, "SELECT * FROM kapal ORDER BY nama_kapal ASC");
-    $teknisi = mysqli_query($conn, "SELECT * FROM teknisi INNER JOIN jenis_perawatan ON teknisi.id_jenis_perawatan = jenis_perawatan.id_jenis_perawatan WHERE teknisi.id_jenis_perawatan = '$id_jenis_perawatan' ORDER BY nama ASC");
+    $kru = mysqli_query($conn, "SELECT * FROM kru INNER JOIN jenis_perawatan ON kru.id_jenis_perawatan = jenis_perawatan.id_jenis_perawatan WHERE kru.id_jenis_perawatan = '$id_jenis_perawatan' ORDER BY nama ASC");
 
     if (isset($_POST['btnSimpan'])) {
         $id_kapal = $_POST['id_kapal'];
-        $id_teknisi = $_POST['id_teknisi'];
+        $id_kru = $_POST['id_kru'];
         if ($id_kapal == '0') {
             echo "
                 <script>
@@ -32,7 +32,7 @@
             exit;
         }
 
-        if ($id_teknisi == '0') {
+        if ($id_kru == '0') {
             echo "
                 <script>
                     alert('Teknisi harus dipilih!');
@@ -44,7 +44,7 @@
 
         $tanggal_sekarang = date('Y-m-d H:i:s');
 
-        $query = "INSERT INTO perawatan VALUES ('', '$id_kapal', '$id_teknisi', '$id_jenis_perawatan', '$tanggal_sekarang', 'Belum')";
+        $query = "INSERT INTO perawatan VALUES ('', '$id_kapal', '$id_kru', '$id_jenis_perawatan', '$tanggal_sekarang', 'Belum Dibaca', '')";
         $tambah_perawatan = mysqli_query($conn, $query);
         if ($tambah_perawatan) {
             $id_perawatan = mysqli_insert_id($conn);
@@ -52,7 +52,7 @@
             $kondisi = mysqli_query($conn, "SELECT * FROM kondisi WHERE id_jenis_perawatan = '$id_jenis_perawatan'");
             while ($data_kondisi = mysqli_fetch_assoc($kondisi)) {
                 $id_kondisi = $data_kondisi['id_kondisi'];
-                mysqli_query($conn, "INSERT INTO detail_perawatan VALUES ('', '$id_perawatan', '$id_kondisi', '', '', 'Belum', NULL, '')");
+                mysqli_query($conn, "INSERT INTO detail_perawatan VALUES ('', '$id_perawatan', '$id_kondisi', '', '', NULL, '', '')");
             }
 
             // Redirect setelah semua selesai
@@ -95,11 +95,11 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="id_teknisi">Nama Teknisi</label>
-                <select name="id_teknisi" id="id_teknisi" required class="form-select">
+                <label for="id_kru">Nama Teknisi</label>
+                <select name="id_kru" id="id_kru" required class="form-select">
                     <option value="0">--- Pilih Teknisi ---</option>
-                    <?php foreach ($teknisi as $data_teknisi): ?>
-                        <option value="<?= $data_teknisi['id_teknisi']; ?>"><?= $data_teknisi['jenis_perawatan']; ?> - <?= $data_teknisi['nama']; ?></option>
+                    <?php foreach ($kru as $data_kru): ?>
+                        <option value="<?= $data_kru['id_kru']; ?>"><?= $data_kru['jenis_perawatan']; ?> - <?= $data_kru['nama']; ?></option>
                     <?php endforeach ?>
                 </select>
             </div>

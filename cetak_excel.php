@@ -16,7 +16,7 @@ $jenis_perawatan = $_GET['jenis_perawatan'] ?? '';
 // Query utama
 $query = "SELECT * FROM perawatan 
           INNER JOIN kapal ON perawatan.id_kapal = kapal.id_kapal 
-          INNER JOIN teknisi ON perawatan.id_teknisi = teknisi.id_teknisi 
+          INNER JOIN kru ON perawatan.id_kru = kru.id_kru 
           INNER JOIN jenis_perawatan ON perawatan.id_jenis_perawatan = jenis_perawatan.id_jenis_perawatan 
           WHERE 1=1";
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 31 Bulan Mei 2025 pada 10.19
+-- Waktu pembuatan: 02 Jul 2025 pada 08.47
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -33,70 +33,34 @@ CREATE TABLE `detail_perawatan` (
   `id_kondisi` int(11) NOT NULL,
   `catatan_kondisi` text DEFAULT NULL,
   `foto_kondisi` text DEFAULT NULL,
-  `status_kondisi` enum('Sudah','Belum') DEFAULT 'Belum',
   `tanggal_cek_kondisi` datetime DEFAULT NULL,
-  `tanda_tangan` text DEFAULT NULL
+  `tanda_tangan` text DEFAULT NULL,
+  `nama_kru` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `detail_perawatan`
 --
 
-INSERT INTO `detail_perawatan` (`id_detail_perawatan`, `id_perawatan`, `id_kondisi`, `catatan_kondisi`, `foto_kondisi`, `status_kondisi`, `tanggal_cek_kondisi`, `tanda_tangan`) VALUES
-(1, 1, 1, '213123', NULL, 'Sudah', '2025-05-29 16:17:30', 'ttg_6838292cbd36b.png'),
-(2, 1, 2, '123', NULL, 'Sudah', '2025-05-29 16:17:36', ''),
-(3, 1, 3, 'tes', NULL, 'Sudah', '2025-05-29 16:17:40', ''),
-(4, 1, 4, '', NULL, 'Sudah', '2025-05-29 16:17:42', ''),
-(5, 2, 1, 'Belum', '', '', NULL, ''),
-(6, 2, 2, 'Belum', '', '', NULL, ''),
-(7, 2, 3, 'Belum', '', '', NULL, ''),
-(8, 2, 4, 'Belum', '', '', NULL, ''),
-(9, 3, 1, 'tes\n', '68382b735f7fa_IMG_7477.JPG', 'Sudah', '2025-05-29 16:40:07', NULL),
-(10, 3, 2, '', '', 'Belum', NULL, ''),
-(11, 3, 3, '', '', 'Belum', NULL, ''),
-(12, 3, 4, '', '', 'Belum', NULL, ''),
-(13, 4, 1, '', '', 'Belum', NULL, ''),
-(14, 4, 2, '', '', 'Belum', NULL, ''),
-(15, 4, 3, '', '', 'Belum', NULL, ''),
-(16, 4, 4, '', '', 'Belum', NULL, ''),
-(17, 6, 8, '', '', 'Belum', NULL, ''),
-(18, 6, 9, '', '', 'Belum', NULL, ''),
-(19, 6, 10, '', '', 'Belum', NULL, ''),
-(20, 6, 11, '', '', 'Belum', NULL, ''),
-(21, 6, 12, '', '', 'Belum', NULL, ''),
-(22, 6, 13, '', '', 'Belum', NULL, ''),
-(23, 7, 1, 'tes', '6838314df3c07_Andri Firman Saputra.png', 'Sudah', '2025-05-29 17:05:11', 'ttg_68383161e1688.png'),
-(24, 7, 2, '', '', 'Sudah', '2025-05-29 17:05:13', 'ttg_68383165c236e.png'),
-(25, 7, 3, '', '', 'Sudah', '2025-05-29 17:05:16', 'ttg_6838316a6dd9a.png'),
-(26, 7, 4, '', '', 'Sudah', '2025-05-29 17:05:19', 'ttg_6838316f91234.png'),
-(27, 8, 14, '', '', 'Sudah', '2025-05-29 17:11:14', 'ttg_683832d7b92d7.png'),
-(28, 8, 15, '', '', 'Sudah', '2025-05-29 17:11:16', 'ttg_683832db48417.png'),
-(29, 8, 16, '', '', 'Sudah', '2025-05-29 17:11:18', 'ttg_683832de5cfc3.png'),
-(30, 8, 17, '', '', 'Sudah', '2025-05-29 17:11:20', 'ttg_683832e1be9f9.png'),
-(31, 8, 18, '', '', 'Sudah', '2025-05-29 17:11:23', 'ttg_683832e595b6e.png'),
-(32, 8, 19, '', '', 'Sudah', '2025-05-29 17:11:26', 'ttg_683832e8a9046.png'),
-(33, 8, 20, '', '', 'Sudah', '2025-05-29 17:11:29', 'ttg_683832eb782b7.png'),
-(34, 8, 21, '', '', 'Sudah', '2025-05-29 17:11:32', 'ttg_683832ee9f828.png'),
-(35, 9, 1, '', '', 'Belum', NULL, ''),
-(36, 9, 2, '', '', 'Belum', NULL, ''),
-(37, 9, 3, '', '', 'Belum', NULL, ''),
-(38, 9, 4, '', '', 'Belum', NULL, ''),
-(39, 10, 1, '', '', 'Belum', NULL, ''),
-(40, 10, 2, '', '', 'Belum', NULL, ''),
-(41, 10, 3, '', '', 'Belum', NULL, ''),
-(42, 10, 4, '', '', 'Belum', NULL, ''),
-(43, 11, 1, '', '', 'Belum', NULL, ''),
-(44, 11, 2, '', '', 'Belum', NULL, ''),
-(45, 11, 3, '', '', 'Belum', NULL, ''),
-(46, 11, 4, '', '', 'Belum', NULL, ''),
-(47, 12, 1, '', '', 'Belum', NULL, ''),
-(48, 12, 2, '', '', 'Belum', NULL, ''),
-(49, 12, 3, '', '', 'Belum', NULL, ''),
-(50, 12, 4, '', '', 'Belum', NULL, ''),
-(51, 13, 1, '', '', 'Belum', NULL, ''),
-(52, 13, 2, '', '', 'Belum', NULL, ''),
-(53, 13, 3, '', '', 'Belum', NULL, ''),
-(54, 13, 4, '', '', 'Belum', NULL, '');
+INSERT INTO `detail_perawatan` (`id_detail_perawatan`, `id_perawatan`, `id_kondisi`, `catatan_kondisi`, `foto_kondisi`, `tanggal_cek_kondisi`, `tanda_tangan`, `nama_kru`) VALUES
+(1, 1, 1, '', '', NULL, '', ''),
+(2, 1, 2, '', '', NULL, '', ''),
+(3, 1, 3, '', '', NULL, '', ''),
+(4, 1, 4, '', '', NULL, '', ''),
+(5, 2, 1, '', '', NULL, '', ''),
+(6, 2, 2, '', '', NULL, '', ''),
+(7, 2, 3, '', '', NULL, '', ''),
+(8, 2, 4, '', '', NULL, '', ''),
+(9, 3, 1, 'baik', '6864ccf5d1330_Screenshot (1).png', '2025-07-02 13:14:11', 'ttg_6864cd447afd7.png', 'tes123\n'),
+(10, 3, 2, 'baik', '6864cf23a1c9d_Screenshot (6).png', '2025-07-02 13:18:26', 'ttg_6864cf2b5f9cb.png', 'joy'),
+(11, 3, 3, 'baik', '', NULL, '', ''),
+(12, 3, 4, 'baik', '', NULL, '', ''),
+(13, 4, 8, 'baik', '', '2025-07-02 13:40:30', '', ''),
+(14, 4, 9, '', '', NULL, '', ''),
+(15, 4, 10, '', '', NULL, '', ''),
+(16, 4, 11, '', '', NULL, '', ''),
+(17, 4, 12, '', '', NULL, '', ''),
+(18, 4, 13, '', '', NULL, '', '');
 
 -- --------------------------------------------------------
 
@@ -154,7 +118,7 @@ CREATE TABLE `kondisi` (
 --
 
 INSERT INTO `kondisi` (`id_kondisi`, `kondisi`, `id_jenis_perawatan`) VALUES
-(1, 'Bebas dari kerusakan?', 1),
+(1, 'Apakah bebas dari kerusakan?', 1),
 (2, 'Kondisi cat?', 1),
 (3, 'Kondisi karat?', 1),
 (4, 'Tanda Lambung Timbul dan Nama Kapal jelas?', 1),
@@ -176,48 +140,49 @@ INSERT INTO `kondisi` (`id_kondisi`, `kondisi`, `id_jenis_perawatan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `perawatan`
+-- Struktur dari tabel `kru`
 --
 
-CREATE TABLE `perawatan` (
-  `id_perawatan` int(11) NOT NULL,
-  `id_kapal` int(11) NOT NULL,
-  `id_teknisi` int(11) NOT NULL,
-  `id_jenis_perawatan` int(11) NOT NULL,
-  `tanggal_perawatan` datetime NOT NULL,
-  `status` enum('Sudah','Belum') DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `perawatan`
---
-
-INSERT INTO `perawatan` (`id_perawatan`, `id_kapal`, `id_teknisi`, `id_jenis_perawatan`, `tanggal_perawatan`, `status`) VALUES
-(7, 1, 1, 1, '2025-05-29 17:04:53', 'Sudah'),
-(8, 1, 3, 3, '2025-05-29 17:04:57', 'Sudah'),
-(13, 1, 1, 1, '2025-05-30 20:32:15', 'Belum');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `teknisi`
---
-
-CREATE TABLE `teknisi` (
-  `id_teknisi` int(11) NOT NULL,
+CREATE TABLE `kru` (
+  `id_kru` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `jabatan` varchar(50) NOT NULL,
   `id_jenis_perawatan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `teknisi`
+-- Dumping data untuk tabel `kru`
 --
 
-INSERT INTO `teknisi` (`id_teknisi`, `nama`, `jabatan`, `id_jenis_perawatan`) VALUES
+INSERT INTO `kru` (`id_kru`, `nama`, `jabatan`, `id_jenis_perawatan`) VALUES
 (1, 'Mualim 1', 'Chief Officer', 1),
 (2, 'mualim 2', 'Second Officer', 2),
 (3, 'Mualim 3', 'Third Officer', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `perawatan`
+--
+
+CREATE TABLE `perawatan` (
+  `id_perawatan` int(11) NOT NULL,
+  `id_kapal` int(11) NOT NULL,
+  `id_kru` int(11) NOT NULL,
+  `id_jenis_perawatan` int(11) NOT NULL,
+  `tanggal_perawatan` datetime NOT NULL,
+  `status` enum('Sudah','Belum Dibaca','Perlu Direvisi') DEFAULT NULL,
+  `catatan_revisi` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `perawatan`
+--
+
+INSERT INTO `perawatan` (`id_perawatan`, `id_kapal`, `id_kru`, `id_jenis_perawatan`, `tanggal_perawatan`, `status`, `catatan_revisi`) VALUES
+(2, 1, 1, 1, '2025-07-02 12:05:17', 'Sudah', ''),
+(3, 1, 1, 1, '2025-07-02 13:08:23', 'Perlu Direvisi', 'kondisi 3 dan 4 masih kosong'),
+(4, 1, 2, 2, '2025-07-02 13:40:20', 'Perlu Direvisi', 'belum kelar nih');
 
 -- --------------------------------------------------------
 
@@ -230,7 +195,7 @@ CREATE TABLE `user` (
   `nama_lengkap` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` enum('Administrator','Operator') NOT NULL
+  `role` enum('Administrator','Kru Lambung Kapal','Kru Alat Navigasi Kapal','Kru Alat Kebakaran dan Keselamatan Kapal') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -239,7 +204,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `nama_lengkap`, `username`, `password`, `role`) VALUES
 (1, 'Admin', 'admin', '$2y$10$8Jp9oTzG8Da2ViApZt6lwOsgfVWohP7frPnQaehfG99qO1diwZOq.', 'Administrator'),
-(3, 'Operator', 'operator', '$2y$10$rzxGkRc79Fi2D95Bdy/cResM1N5XKS/UWrkxLKj.8Xpy9o7sAIuNC', 'Operator');
+(4, 'Kru Lambung Kapal', 'krulk', '$2y$10$fyjVbQL3/wmmZ3ODNDptuORnmNWCv0ZWLRiF2FuAxTBH/ZQFZytC.', 'Kru Lambung Kapal'),
+(6, 'Kru Alat Navigasi Kapal', 'kruan', '$2y$10$H0/T5V9WAqFdiV.DVvZGIe/a3dIqzYJMAMKE46DC/dqQ0e.oY1Xa2', 'Kru Alat Navigasi Kapal'),
+(7, 'Kru Alat Kebakaran dan Keselamatan Kapal', 'kruak', '$2y$10$YpC2WDjmF.ju0xDQtK.F0.8iHtIjEEV4UWziWknFPuj1871WaHryK', 'Kru Alat Kebakaran dan Keselamatan Kapal');
 
 --
 -- Indexes for dumped tables
@@ -273,20 +240,20 @@ ALTER TABLE `kondisi`
   ADD KEY `id_jenis_perawatan` (`id_jenis_perawatan`);
 
 --
+-- Indeks untuk tabel `kru`
+--
+ALTER TABLE `kru`
+  ADD PRIMARY KEY (`id_kru`),
+  ADD KEY `id_jenis_perawatan` (`id_jenis_perawatan`);
+
+--
 -- Indeks untuk tabel `perawatan`
 --
 ALTER TABLE `perawatan`
   ADD PRIMARY KEY (`id_perawatan`),
-  ADD KEY `id_teknisi` (`id_teknisi`),
+  ADD KEY `id_teknisi` (`id_kru`),
   ADD KEY `id_jenis_perawatan` (`id_jenis_perawatan`),
   ADD KEY `id_kapal` (`id_kapal`);
-
---
--- Indeks untuk tabel `teknisi`
---
-ALTER TABLE `teknisi`
-  ADD PRIMARY KEY (`id_teknisi`),
-  ADD KEY `id_jenis_perawatan` (`id_jenis_perawatan`);
 
 --
 -- Indeks untuk tabel `user`
@@ -302,7 +269,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `detail_perawatan`
 --
 ALTER TABLE `detail_perawatan`
-  MODIFY `id_detail_perawatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id_detail_perawatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `jenis_perawatan`
@@ -323,22 +290,22 @@ ALTER TABLE `kondisi`
   MODIFY `id_kondisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
+-- AUTO_INCREMENT untuk tabel `kru`
+--
+ALTER TABLE `kru`
+  MODIFY `id_kru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT untuk tabel `perawatan`
 --
 ALTER TABLE `perawatan`
-  MODIFY `id_perawatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT untuk tabel `teknisi`
---
-ALTER TABLE `teknisi`
-  MODIFY `id_teknisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_perawatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -351,16 +318,16 @@ ALTER TABLE `kondisi`
   ADD CONSTRAINT `kondisi_ibfk_1` FOREIGN KEY (`id_jenis_perawatan`) REFERENCES `jenis_perawatan` (`id_jenis_perawatan`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Ketidakleluasaan untuk tabel `kru`
+--
+ALTER TABLE `kru`
+  ADD CONSTRAINT `kru_ibfk_1` FOREIGN KEY (`id_jenis_perawatan`) REFERENCES `jenis_perawatan` (`id_jenis_perawatan`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Ketidakleluasaan untuk tabel `perawatan`
 --
 ALTER TABLE `perawatan`
   ADD CONSTRAINT `perawatan_ibfk_1` FOREIGN KEY (`id_jenis_perawatan`) REFERENCES `jenis_perawatan` (`id_jenis_perawatan`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Ketidakleluasaan untuk tabel `teknisi`
---
-ALTER TABLE `teknisi`
-  ADD CONSTRAINT `teknisi_ibfk_1` FOREIGN KEY (`id_jenis_perawatan`) REFERENCES `jenis_perawatan` (`id_jenis_perawatan`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

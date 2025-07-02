@@ -4,18 +4,18 @@
         echo "<script>window.location='login.php'</script>";
     }
 
-    $id_teknisi = $_GET['id_teknisi'];
+    $id_kru = $_GET['id_kru'];
 
-    $data_teknisi = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM teknisi WHERE id_teknisi = '$id_teknisi'"));
-    $nama = $data_teknisi['nama'];
+    $data_kru = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM kru WHERE id_kru = '$id_kru'"));
+    $nama = $data_kru['nama'];
 
-    $delete_teknisi = mysqli_query($conn, "DELETE FROM teknisi WHERE id_teknisi = '$id_teknisi'");
+    $delete_kru = mysqli_query($conn, "DELETE FROM kru WHERE id_kru = '$id_kru'");
 
-	if ($delete_teknisi) {
+	if ($delete_kru) {
 	    echo "
 	        <script>
 	            alert('Teknisi " . $nama . " berhasil dihapus!');
-	            window.location.href = 'teknisi.php';
+	            window.location.href = 'kru.php';
 	        </script>
 	    ";
 	    exit;
@@ -23,7 +23,7 @@
 	    echo "
 	        <script>
 	            alert('Teknisi " . $nama . " gagal dihapus!');
-	            window.location.href = 'teknisi.php';
+	            window.location.href = 'kru.php';
 	        </script>
 	    ";
 	    exit;
