@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Agu 2025 pada 11.20
+-- Waktu pembuatan: 01 Agu 2025 pada 11.29
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -152,9 +152,9 @@ CREATE TABLE `kru` (
 --
 
 INSERT INTO `kru` (`id_kru`, `nama`, `jabatan`, `id_jenis_perawatan`, `id_user`) VALUES
-(1, 'Mualim 1', 'Chief Officer', 1, 1),
-(2, 'mualim 2', 'Second Officer', 2, 1),
-(3, 'Mualim 3', 'Third Officer', 3, 1);
+(1, 'Mualim 1', 'Chief Officer', 1, 4),
+(2, 'mualim 2', 'Second Officer', 2, 6),
+(3, 'Mualim 3', 'Third Officer', 3, 7);
 
 -- --------------------------------------------------------
 
@@ -291,7 +291,7 @@ ALTER TABLE `kondisi`
 -- AUTO_INCREMENT untuk tabel `kru`
 --
 ALTER TABLE `kru`
-  MODIFY `id_kru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_kru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `perawatan`
