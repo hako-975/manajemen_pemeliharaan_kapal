@@ -7,7 +7,7 @@
     $id_user = $_SESSION['id_user'];
     $dataUser = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM user WHERE id_user = '$id_user'"));
 
-    $kru = mysqli_query($conn, "SELECT * FROM kru INNER JOIN jenis_perawatan ON kru.id_jenis_perawatan = jenis_perawatan.id_jenis_perawatan ORDER BY nama ASC");
+    $kru = mysqli_query($conn, "SELECT * FROM kru INNER JOIN jenis_perawatan ON kru.id_jenis_perawatan = jenis_perawatan.id_jenis_perawatan INNER JOIN user ON kru.id_user = user.id_user ORDER BY nama ASC");
 
     if (isset($_POST['btnCari'])) {
         $cari = $_POST['cari'];
@@ -44,6 +44,7 @@
                     <th>Kru</th>
                     <th>Nama Lengkap</th>
                     <th>Jabatan</th>
+                    <th>Username</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -55,6 +56,7 @@
                         <td><?= $data_kru['jenis_perawatan']; ?></td>
                         <td><?= $data_kru['nama']; ?></td>
                         <td><?= $data_kru['jabatan']; ?></td>
+                        <td><?= $data_kru['username']; ?></td>
                         <td>
                             <a href="ubah_kru.php?id_kru=<?= $data_kru['id_kru']; ?>" class="btn margin-5px">Ubah</a>
                             <a onclick="return confirm('Apakah Anda yakin ingin menghapus kru <?= $data_kru['nama']; ?>?')" href="hapus_kru.php?id_kru=<?= $data_kru['id_kru']; ?>" class="btn margin-5px bg-red">Hapus</a>

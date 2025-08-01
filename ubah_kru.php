@@ -8,16 +8,18 @@
     $dataUser = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM user WHERE id_user = '$id_user'"));
 
     $id_kru = $_GET['id_kru'];
-    $data_kru = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM kru INNER JOIN jenis_perawatan ON kru.id_jenis_perawatan = jenis_perawatan.id_jenis_perawatan WHERE id_kru = '$id_kru'"));
+    $data_kru = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM kru INNER JOIN jenis_perawatan ON kru.id_jenis_perawatan = jenis_perawatan.id_jenis_perawatan INNER JOIN user ON kru.id_user = user.id_user WHERE id_kru = '$id_kru'"));
+    $user = mysqli_query($conn, "SELECT * FROM user");
 
     $jenis_perawatan = mysqli_query($conn, "SELECT * FROM jenis_perawatan");
 
     if (isset($_POST['btnSimpan'])) {
         $id_jenis_perawatan = $_POST['id_jenis_perawatan'];
+        $id_user = $_POST['id_user'];
         $nama_kru = $_POST['nama'];
         $jabatan = $_POST['jabatan'];
     
-        $query = "UPDATE kru SET id_jenis_perawatan = '$id_jenis_perawatan', nama = '$nama_kru', jabatan = '$jabatan' WHERE id_kru = '$id_kru'";
+        $query = "UPDATE kru SET id_user = '$id_user', id_jenis_perawatan = '$id_jenis_perawatan', nama = '$nama_kru', jabatan = '$jabatan' WHERE id_kru = '$id_kru'";
         $ubah_kru = mysqli_query($conn, $query);
     
         if ($ubah_kru) {
@@ -72,6 +74,17 @@
             <div class="form-group">
                 <label for="jabatan">Jabatan</label>
                 <input type="text" id="jabatan" name="jabatan" class="input" value="<?= $data_kru['jabatan']; ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="id_user">Username</label>
+                <select name="id_user" id="id_user" required class="form-select">
+                    <option value="<?= $data_kru['id_user']; ?>"><?= $data_kru['username']; ?></option>
+                    <?php foreach ($user as $du): ?>
+                        <?php if ($data_kru['id_user'] != $du['id_user']): ?>
+                            <option value="<?= $du['id_user']; ?>"><?= $du['username']; ?></option>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                </select>
             </div>
             <button type="submit" class="btn" name="btnSimpan">Simpan</button>
         </form>

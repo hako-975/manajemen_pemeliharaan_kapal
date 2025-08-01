@@ -6,6 +6,8 @@
 
     $id_user = $_SESSION['id_user'];
     $dataUser = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM user WHERE id_user = '$id_user'"));
+    
+    $user = mysqli_query($conn, "SELECT * FROM user");
 
     $jenis_perawatan = mysqli_query($conn, "SELECT * FROM jenis_perawatan");
 
@@ -13,8 +15,9 @@
         $nama_kru = $_POST['nama'];
         $jabatan = $_POST['jabatan'];
         $id_jenis_perawatan = $_POST['id_jenis_perawatan'];
+        $id_user = $_POST['id_user'];
     
-        $query = "INSERT INTO kru VALUES ('', '$nama_kru', '$jabatan', '$id_jenis_perawatan')";
+        $query = "INSERT INTO kru VALUES ('', '$nama_kru', '$jabatan', '$id_jenis_perawatan', '$id_user')";
         $tambah_kru = mysqli_query($conn, $query);
     
         if ($tambah_kru) {
@@ -67,6 +70,15 @@
             <div class="form-group">
                 <label for="jabatan">Jabatan</label>
                 <input type="text" id="jabatan" name="jabatan" class="input" required>
+            </div>
+            <div class="form-group">
+                <label for="id_user">Username</label>
+                <select name="id_user" id="id_user" required class="form-select">
+                    <option value="0">--- User ---</option>
+                    <?php foreach ($user as $du): ?>
+                        <option value="<?= $du['id_user']; ?>"><?= $du['username']; ?></option>
+                    <?php endforeach ?>
+                </select>
             </div>
             <button type="submit" class="btn" name="btnSimpan">Simpan</button>
         </form>

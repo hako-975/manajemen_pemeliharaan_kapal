@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Jul 2025 pada 08.47
+-- Waktu pembuatan: 01 Agu 2025 pada 11.20
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -35,7 +35,7 @@ CREATE TABLE `detail_perawatan` (
   `foto_kondisi` text DEFAULT NULL,
   `tanggal_cek_kondisi` datetime DEFAULT NULL,
   `tanda_tangan` text DEFAULT NULL,
-  `nama_kru` varchar(100) NOT NULL
+  `nama_kru` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -43,10 +43,6 @@ CREATE TABLE `detail_perawatan` (
 --
 
 INSERT INTO `detail_perawatan` (`id_detail_perawatan`, `id_perawatan`, `id_kondisi`, `catatan_kondisi`, `foto_kondisi`, `tanggal_cek_kondisi`, `tanda_tangan`, `nama_kru`) VALUES
-(1, 1, 1, '', '', NULL, '', ''),
-(2, 1, 2, '', '', NULL, '', ''),
-(3, 1, 3, '', '', NULL, '', ''),
-(4, 1, 4, '', '', NULL, '', ''),
 (5, 2, 1, '', '', NULL, '', ''),
 (6, 2, 2, '', '', NULL, '', ''),
 (7, 2, 3, '', '', NULL, '', ''),
@@ -147,17 +143,18 @@ CREATE TABLE `kru` (
   `id_kru` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `jabatan` varchar(50) NOT NULL,
-  `id_jenis_perawatan` int(11) NOT NULL
+  `id_jenis_perawatan` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `kru`
 --
 
-INSERT INTO `kru` (`id_kru`, `nama`, `jabatan`, `id_jenis_perawatan`) VALUES
-(1, 'Mualim 1', 'Chief Officer', 1),
-(2, 'mualim 2', 'Second Officer', 2),
-(3, 'Mualim 3', 'Third Officer', 3);
+INSERT INTO `kru` (`id_kru`, `nama`, `jabatan`, `id_jenis_perawatan`, `id_user`) VALUES
+(1, 'Mualim 1', 'Chief Officer', 1, 1),
+(2, 'mualim 2', 'Second Officer', 2, 1),
+(3, 'Mualim 3', 'Third Officer', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -244,7 +241,8 @@ ALTER TABLE `kondisi`
 --
 ALTER TABLE `kru`
   ADD PRIMARY KEY (`id_kru`),
-  ADD KEY `id_jenis_perawatan` (`id_jenis_perawatan`);
+  ADD KEY `id_jenis_perawatan` (`id_jenis_perawatan`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indeks untuk tabel `perawatan`
@@ -281,19 +279,19 @@ ALTER TABLE `jenis_perawatan`
 -- AUTO_INCREMENT untuk tabel `kapal`
 --
 ALTER TABLE `kapal`
-  MODIFY `id_kapal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_kapal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `kondisi`
 --
 ALTER TABLE `kondisi`
-  MODIFY `id_kondisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_kondisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT untuk tabel `kru`
 --
 ALTER TABLE `kru`
-  MODIFY `id_kru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_kru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `perawatan`
@@ -305,11 +303,18 @@ ALTER TABLE `perawatan`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
+
+--
+-- Ketidakleluasaan untuk tabel `detail_perawatan`
+--
+ALTER TABLE `detail_perawatan`
+  ADD CONSTRAINT `detail_perawatan_ibfk_1` FOREIGN KEY (`id_kondisi`) REFERENCES `kondisi` (`id_kondisi`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `detail_perawatan_ibfk_2` FOREIGN KEY (`id_perawatan`) REFERENCES `perawatan` (`id_perawatan`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ketidakleluasaan untuk tabel `kondisi`
@@ -321,13 +326,16 @@ ALTER TABLE `kondisi`
 -- Ketidakleluasaan untuk tabel `kru`
 --
 ALTER TABLE `kru`
-  ADD CONSTRAINT `kru_ibfk_1` FOREIGN KEY (`id_jenis_perawatan`) REFERENCES `jenis_perawatan` (`id_jenis_perawatan`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `kru_ibfk_1` FOREIGN KEY (`id_jenis_perawatan`) REFERENCES `jenis_perawatan` (`id_jenis_perawatan`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `kru_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ketidakleluasaan untuk tabel `perawatan`
 --
 ALTER TABLE `perawatan`
-  ADD CONSTRAINT `perawatan_ibfk_1` FOREIGN KEY (`id_jenis_perawatan`) REFERENCES `jenis_perawatan` (`id_jenis_perawatan`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `perawatan_ibfk_1` FOREIGN KEY (`id_jenis_perawatan`) REFERENCES `jenis_perawatan` (`id_jenis_perawatan`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `perawatan_ibfk_2` FOREIGN KEY (`id_kru`) REFERENCES `kru` (`id_kru`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `perawatan_ibfk_3` FOREIGN KEY (`id_kapal`) REFERENCES `kapal` (`id_kapal`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
